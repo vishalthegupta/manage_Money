@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment Variables (Critical for Security)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging
+*.local
+
+# Build Output
+dist/
+dist-ssr/
+build/
+out/
+
+# Vite
+.vite/
+vite.config.js.timestamp-*
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS Files
+Thumbs.db
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Optional npm cache
+.npm
+.eslintcache
+
+# Temporary folders
+tmp/
+temp/
+
+# Security Files
+*.key
+*.pem
+*.p12
+*.crt
+
+# Backup files
+*.bak
+*.backup
+*.orig
