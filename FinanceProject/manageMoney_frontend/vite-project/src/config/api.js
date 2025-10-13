@@ -7,7 +7,7 @@ const API_CONFIG = {
   },
   // Production environment (update this when deploying)
   production: {
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'https://your-production-api.com', // Use environment variable or fallback
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'https://managemoney.onrender.com', // Use environment variable or fallback
     timeout: 15000, // 15 seconds
   },
   // Staging environment (optional)
