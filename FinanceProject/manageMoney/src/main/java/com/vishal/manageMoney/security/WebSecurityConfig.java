@@ -42,49 +42,43 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Allow your frontend URLs - supports both development and production
-        String frontendUrl = System.getenv("FRONTEND_URL");
-        if (frontendUrl != null) {
-            // Production - use environment variable
-            configuration.setAllowedOrigins(Arrays.asList(frontendUrl));
-        } else {
-            // Development - use localhost
-            configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000",  // For Create React App default port
-                "http://localhost:5173",  // For Vite default port
-                "http://localhost:4173"   // For Vite preview port
-            ));
-        }
-        
-        // Allow common HTTP methods
+
+        // ✅ Allowed origins: production and local development
+        configuration.setAllowedOrigins(Arrays.asList(
+            "https://manage-money-beige.vercel.app", // ✅ Production frontend
+            "http://localhost:3000",                 // 🛠️ CRA dev
+            "http://localhost:5173",                 // 🛠️ Vite dev
+            "http://localhost:4173"                  // 🛠️ Vite preview
+        ));
+
+        // ✅ Allowed methods
         configuration.setAllowedMethods(Arrays.asList(
             "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
         ));
-        
-        // Allow common headers
+
+        // ✅ Allowed headers
         configuration.setAllowedHeaders(Arrays.asList(
-            "Authorization", 
-            "Content-Type", 
+            "Authorization",
+            "Content-Type",
             "X-Requested-With",
             "Accept",
             "Origin",
             "Access-Control-Request-Method",
             "Access-Control-Request-Headers"
         ));
-        
-        // Allow credentials (cookies, authorization headers)
+
+        // ✅ Allow cookies and credentials
         configuration.setAllowCredentials(true);
-        
-        // Expose headers that the frontend can access
+
+        // ✅ Expose headers to frontend
         configuration.setExposedHeaders(Arrays.asList(
             "Access-Control-Allow-Origin",
             "Access-Control-Allow-Credentials"
         ));
-        
-        // Cache preflight response for 1 hour
+
+        // ✅ Cache preflight response for 1 hour
         configuration.setMaxAge(3600L);
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -93,7 +87,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
